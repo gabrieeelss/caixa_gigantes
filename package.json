@@ -1,0 +1,27 @@
+{
+  "name": "caixa_gigantes",
+  "version": "1.0.0",
+  "description": "API de controle do fluxo de caixa da associacao",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrieeelss/caixa_gigantes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrieeelss/caixa_gigantes/issues"
+  },
+  "homepage": "https://github.com/gabrieeelss/caixa_gigantes#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.14"
+  }
+}

@@ -10,32 +10,13 @@ res.setHeader('Access-Control-Allow-Origin', '*')
 res.send('CaixaGigantes')
 })
 
-async function adicionarMovimento(){
-
-let dados = {
-
-data_movimento: document.getElementById("data").value,
-categoria_id: document.getElementById("categoria").value,
-descricao: document.getElementById("descricao").value,
-valor: document.getElementById("valor").value,
-associado_id: document.getElementById("associado").value,
-nome_manual: document.getElementById("nome_manual").value
-
-}
-
-await fetch("http://localhost:3000/caixa",{
-
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body: JSON.stringify(dados)
-
+let mysql = require('mysql')
+let conexao = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "",
+    database: "DATABASE"
 })
-
-carregarCaixa()
-
-}
 
 console.log(process.env.PORTA)
 app.listen(process.env.PORTA)

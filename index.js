@@ -12,9 +12,9 @@ res.send('CaixaGigantes')
 
 let mysql = require('mysql')
 let conexao = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
+    host: "SERVIDOR_BD",
+    user: "USER_BD",
+    password: "SENHA_BD",
     database: "DATABASE"
 })
 

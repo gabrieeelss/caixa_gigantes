@@ -4,14 +4,16 @@ function fnLimparCampos() {
 
 function fnCadastrarAssociado(){
     let dadosAssociado = {
-        data: document.getElementById("data_cadastro").value,
+        data_nascimento: document.getElementById("data_nascimento").value,
         nome: document.getElementById("nome_associado").value,
         email: document.getElementById("email_associado").value,
-        telefone: document.getElementById("telefone_associado").value
-
+        telefone: document.getElementById("telefone_associado").value,
+        cpf: document.getElementById("cpf_associado").value,
+        rg: document.getElementById("rg_associado").value,
+        endereco: document.getElementById("endereco_associado").value
     }
 
-    fetch('http://localhost:3000/cad-associado', {
+    fetch('http://127.0.0.1:3000/cad-associado', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dadosAssociado),
@@ -30,8 +32,8 @@ function fnCadastrarAssociado(){
         console.log(dados)
         alert("Associado Cadastrado com sucesso! ID: " + dados)
     })
-    .catch(erro => alert("Falha ao cadastrar o associado: " + erro.message))
+    .catch(erro => alert("Falha ao cadastrar o associado: " + erro))
 }
 
-let btn_salvar = document.getElementById("btn-cad-associado")
+let btn_salvar = document.getElementById("btn-add-associado")
 btn_salvar.addEventListener("click", fnCadastrarAssociado)

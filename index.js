@@ -91,5 +91,16 @@ app.post("/cad-associado", function (req, res) {
         });
 })
 
+// EXIBIR ASSOCIADOS
+app.get("/exibir-associados", function (req, res) {
+    conexao.query("SELECT * FROM associados", function (erro, dados) {
+        if (erro) {
+            return res.status(500).json({ erro: "Erro ao buscar associados" })
+        }
+        res.json(dados)
+    })
+})
+
+
 console.log(process.env.PORTA)
 app.listen(process.env.PORTA)

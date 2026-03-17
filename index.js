@@ -101,6 +101,18 @@ app.get("/exibir-associados", function (req, res) {
     })
 })
 
+// CADASTRAR MOVIMENTAÇÃO
+app.post("/cad-movimentacao", function (req, res) {
+    const data = req.body
 
+    console.log(data)
+    conexao.query('INSERT INTO caixa set ?', [data],
+        function (erro, resultado) {
+            if (erro) {
+                res.json(erro);
+            }
+            res.send(resultado.insertId);
+        });
+})
 console.log(process.env.PORTA)
 app.listen(process.env.PORTA)

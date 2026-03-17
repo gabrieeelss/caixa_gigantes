@@ -1,108 +1,54 @@
-async function carregarCaixa(){
-
-    const resposta = await fetch("http://localhost:3000/caixa")
-    const dados = await resposta.json()
-
-    let tabela = document.getElementById("tabelaCaixa")
-    tabela.innerHTML = ""
-
-    let saldo = 0
-
-    dados.forEach(item => {
-
-        let classe = item.tipo === "entrada" ? "text-success" : "text-danger"
-
-        if(item.tipo === "entrada"){
-            saldo += parseFloat(item.valor)
-        }else{
-            saldo -= parseFloat(item.valor)
-        }
-
-        tabela.innerHTML += `
-        <tr>
-
-        <td>${item.data_movimento}</td>
-
-        <td>${item.descricao}</td>
-
-        <td>${item.categoria}</td>
-
-        <td>${item.tipo}</td>
-
-        <td class="${classe}">
-        R$ ${item.valor}
-        </td>
-
-        </tr>
-        `
-
-    })
-
-    document.getElementById("saldo").innerText = saldo.toFixed(2)
-
+function fnLimparCampos() {
+    document.getElementById("form-fluxo-caixa").reset()
 }
 
+async function fnAdicionarMovimento() {
 
-
-async function adicionarMovimento(){
-
-    let dados = {
-
-        data_movimento: document.getElementById("data").value,
+    let dadosMovimentacao = {
+        data_movimento: document.getElementById("data_movimento").value,
         categoria_id: document.getElementById("categoria").value,
+        associado_id: document.getElementById("associado_id").value,
+        nome_manual: document.getElementById("nome_manual").value,
         descricao: document.getElementById("descricao").value,
         valor: document.getElementById("valor").value
-
     }
+console.log(dadosMovimentacao);
 
-    await fetch("http://localhost:3000/caixa",{
-
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(dados)
-
+    await fetch("http://127.0.0.1:3000/cad-movimentacao", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(dadosMovimentacao),
+        credentials: 'include'
     })
-
-    limparCampos()
-
-    carregarCaixa()
-
+    .then(resposta => {
+        if (!resposta.ok) {
+            return resposta.json().then(err => {
+                throw new Error(err.erro || "Erro " + resposta.status)
+            })
+        }
+        return resposta.json()
+    })
+    .then(dados => {
+        fnLimparCampos()
+        console.log(dados)
+        alert("Movimentação Cadastrada Com Sucesso! ID: " + dados)
+    })
+    .catch(erro => console.log(erro))
 }
 
-
-
-function limparCampos(){
-
-    document.getElementById("descricao").value = ""
-    document.getElementById("valor").value = ""
-
-}
-
-
-
-document
-.getElementById("btnAdicionar")
-.addEventListener("click", adicionarMovimento)
-
-
-async function carregarAssociados(){
-
-const resposta = await fetch("http://localhost:3000/associados")
-const dados = await resposta.json()
-
-let select = document.getElementById("associado")
-
-dados.forEach(a => {
-
-select.innerHTML += `
+async function fnCarregarAssociados() {
+    const resposta = await fetch("http://127.0.0.1:3000/exibir-associados")
+    const dados = await resposta.json()
+    let select = document.getElementById("associado_id")
+    dados.forEach(a => {
+        select.innerHTML += `
 <option value="${a.id}">
 ${a.nome}
 </option>
 `
-
-})
-
+    })
 }
-carregarCaixa()
+
+let btn_salvar = document.getElementById("btn-add-mov")
+btn_salvar.addEventListener("click", fnAdicionarMovimento)
+fnCarregarAssociados()

@@ -6,7 +6,7 @@ async function fnAdicionarMovimento() {
 
     let dadosMovimentacao = {
         data_movimento: document.getElementById("data_movimento").value,
-        categoria_id: document.getElementById("categoria").value,
+        categoria_id: document.getElementById("categoria_id").value,
         associado_id: document.getElementById("associado_id").value,
         nome_manual: document.getElementById("nome_manual").value,
         descricao: document.getElementById("descricao").value,
@@ -49,6 +49,20 @@ ${a.nome}
     })
 }
 
+async function fnCarregarCategorias() {
+    const resposta = await fetch("http://127.0.0.1:3000/exibir-categorias")
+    const dados = await resposta.json()
+    let select = document.getElementById("categoria_id")
+    dados.forEach(a => {
+        select.innerHTML += `
+<option value="${a.id}">
+${a.nome}
+</option>
+`
+    })
+}
+
 let btn_salvar = document.getElementById("btn-add-mov")
 btn_salvar.addEventListener("click", fnAdicionarMovimento)
 fnCarregarAssociados()
+fnCarregarCategorias()

@@ -101,18 +101,45 @@ app.get("/exibir-associados", function (req, res) {
     })
 })
 
+// EXIBIR CATEGORIAS
+app.get("/exibir-categorias", function (req, res) {
+    conexao.query("SELECT * FROM categorias", function (erro, dados) {
+        if (erro) {
+            return res.status(500).json({ erro: "Erro ao buscar categorias" })
+        }
+        res.json(dados)
+    })
+})
+
 // CADASTRAR MOVIMENTAÇÃO
 app.post("/cad-movimentacao", function (req, res) {
     const data = req.body
 
     console.log(data)
-    conexao.query('INSERT INTO caixa set ?', [data],
-        function (erro, resultado) {
-            if (erro) {
-                res.json(erro);
-            }
-            res.send(resultado.insertId);
-        });
+
+    conexao.query('INSERT INTO caixa SET ?', data, function (erro, resultado) {
+        if (erro) {
+            console.log("Erro ao inserir:", erro)
+            return res.status(500).json({
+                erro: "Erro ao cadastrar movimentação",
+                detalhes: erro.sqlMessage
+            })
+        }
+
+        return res.json(resultado.insertId)
+    })
 })
+// app.post("/cad-movimentacao", function (req, res) {
+//     const data = req.body
+
+//     console.log(data)
+//     conexao.query('INSERT INTO caixa set ?', [data],
+//         function (erro, resultado) {
+//             if (erro) {
+//                 res.json(erro);
+//             }
+//             res.send(resultado.insertId);
+//         });
+// })
 console.log(process.env.PORTA)
 app.listen(process.env.PORTA)

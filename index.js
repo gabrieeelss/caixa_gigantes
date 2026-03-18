@@ -141,5 +141,27 @@ app.post("/cad-movimentacao", function (req, res) {
 //             res.send(resultado.insertId);
 //         });
 // })
+
+
+// CADASTRAR MENSALIDADE
+app.post("/cad-mensalidade", function (req, res) {
+    const data = req.body
+
+    console.log(data)
+
+    conexao.query('INSERT INTO mensalidades SET ?', data, function (erro, resultado) {
+        if (erro) {
+            console.log("Erro ao inserir:", erro)
+            return res.status(500).json({
+                erro: "Erro ao cadastrar mensalidade",
+                detalhes: erro.sqlMessage
+            })
+        }
+
+        return res.json(resultado.insertId)
+    })
+})
+
+
 console.log(process.env.PORTA)
 app.listen(process.env.PORTA)

@@ -7,7 +7,7 @@ async function fnAdicionarMovimento() {
     let dadosMovimentacao = {
         data_movimento: document.getElementById("data_movimento").value,
         categoria_id: document.getElementById("categoria_id").value,
-        associado_id: document.getElementById("associado_id").value,
+        associado_id: document.getElementById("associado_id_caixa").value,
         nome_manual: document.getElementById("nome_manual").value,
         descricao: document.getElementById("descricao").value,
         valor: document.getElementById("valor").value
@@ -39,7 +39,7 @@ console.log(dadosMovimentacao);
 async function fnCarregarAssociados() {
     const resposta = await fetch("http://127.0.0.1:3000/exibir-associados")
     const dados = await resposta.json()
-    let select = document.getElementById("associado_id")
+    let select = document.getElementById("associado_id_caixa")
     dados.forEach(a => {
         select.innerHTML += `
 <option value="${a.id}">

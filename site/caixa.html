@@ -30,12 +30,64 @@
             </div>
         </div>
 
-        <!-- FORMULÁRIO -->
+        <!-- FORMULÁRIO DE MENSALIDADES -->
+        <form action="#" id="form-mensalidades">
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    <h5>Adicionar Mensalidade</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <select id="associado_id_mensalidade" class="form-select">
+                                <option value="">Selecione o associado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="mes" class="form-select">
+                                <option value="">Selecione o mês</option>
+                                <option value="1">Janeiro</option>
+                                <option value="2">Fevereiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" id="ano" class="form-control" placeholder="Ano" min="2024" max="2100">
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="number" id="valor" class="form-control" placeholder="Valor" step="0.01" min="0">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" id="data_pagamento" class="form-control">
+                        </div>
+                        <div class="col-md-1 d-grid">
+                            <button id="btn-add-mensalidade" class="btn btn-primary">
+                                +
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- FORMULÁRIO DE RECEITAS E DESPESAS -->
         <form action="#" id="form-fluxo-caixa">
             <div class="card mb-4">
 
                 <div class="card-header">
-                    Adicionar Receita / Despesa
+                    <h5>Adicionar Receita / Despesa</h5>
                 </div>
 
                 <div class="card-body">
@@ -52,11 +104,11 @@
                         <div class="col-md-3">
                             <select id="categoria_id" class="form-select">
                                 <option value="">Selecione Categoria</option>
-                                </select>
+                            </select>
                         </div>
-                        
+
                         <div class="col-md-3">
-                            <select id="associado_id" class="form-select">
+                            <select id="associado_id_caixa" class="form-select">
                                 <option value="">Selecione Associado</option>
                             </select>
                         </div>
@@ -105,6 +157,7 @@
     </div>
 
     <script src="app_caixa.js"></script>
+    <script src="app_mensalidades.js"></script>
 
 </body>
 

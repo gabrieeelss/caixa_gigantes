@@ -7,10 +7,10 @@ async function fnAdicionarMovimento() {
     let dadosMovimentacao = {
         data_movimento: document.getElementById("data_movimento").value,
         categoria_id: document.getElementById("categoria_id").value,
-        associado_id: document.getElementById("associado_id_caixa").value,
+        associado_id: document.getElementById("associado_id_caixa").value || null,
         nome_manual: document.getElementById("nome_manual").value,
         descricao: document.getElementById("descricao").value,
-        valor: document.getElementById("valor").value
+        valor: document.getElementById("valor_mov").value
     }
 console.log(dadosMovimentacao);
 
@@ -31,6 +31,7 @@ console.log(dadosMovimentacao);
     .then(dados => {
         fnLimparCampos()
         console.log(dados)
+        fnCarregarSaldo()
         alert("Movimentação Cadastrada Com Sucesso! ID: " + dados)
     })
     .catch(erro => console.log(erro))

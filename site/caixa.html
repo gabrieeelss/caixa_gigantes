@@ -19,14 +19,12 @@
 
         <!-- SALDO -->
 
-        <div class="card mb-4">
+        <div class="card mb-4 shadow-sm">
             <div class="card-body">
-
-                <h4>
+                <h4 class="mb-0">
                     Saldo Atual:
-                    <span class="text-success">R$ <span id="saldo">0.00</span></span>
+                    R$ <span id="saldo">0,00</span>
                 </h4>
-
             </div>
         </div>
 
@@ -67,7 +65,8 @@
                         </div>
 
                         <div class="col-md-2">
-                            <input type="number" id="valor" class="form-control" placeholder="Valor" step="0.01" min="0">
+                            <input type="number" id="valor_mensalidade" class="form-control" placeholder="Valor" step="0.01"
+                                min="0">
                         </div>
                         <div class="col-md-3">
                             <input type="date" id="data_pagamento" class="form-control">
@@ -120,7 +119,7 @@
                             <input type="text" id="descricao" class="form-control" placeholder="Descrição">
                         </div>
                         <div class="col-md-2">
-                            <input type="number" id="valor" class="form-control" placeholder="Valor">
+                            <input type="number" id="valor_mov" class="form-control" placeholder="Valor">
                         </div>
                         <div class="col-md-1 d-grid">
                             <button id="btn-add-mov" class="btn btn-primary">
@@ -133,31 +132,34 @@
         </form>
         <!-- TABELA -->
 
-        <div class="card">
-
+        <div class="card shadow-sm">
             <div class="card-header">
                 Movimentações
             </div>
             <div class="card-body">
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Tipo</th>
-                            <th>Data</th>
-                            <th>Associado</th>
-                            <th>Categoria</th>
-                            <th>Descrição</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabelaCaixa"></tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Associado / Nome</th>
+                                <th>Categoria</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaCaixa"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="app_caixa.js"></script>
     <script src="app_mensalidades.js"></script>
+    <script src="app_saldo.js"></script>
+    <script src="app_lista_caixa.js"></script>
 
 </body>
 

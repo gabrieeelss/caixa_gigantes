@@ -1,7 +1,10 @@
 
 async function carregarCaixa() {
 
-    const resposta = await fetch("http://localhost:3000/caixa")
+    const resposta = await fetch("http://localhost:3000/caixa", {
+        method: 'GET',
+        credentials: 'include'
+    })
     const dados = await resposta.json()
 
     let tabela = document.getElementById("tabelaCaixa")

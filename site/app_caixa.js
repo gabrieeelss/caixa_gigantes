@@ -12,33 +12,36 @@ async function fnAdicionarMovimento() {
         descricao: document.getElementById("descricao").value,
         valor: document.getElementById("valor_mov").value
     }
-console.log(dadosMovimentacao);
+    console.log(dadosMovimentacao);
 
     await fetch("http://127.0.0.1:3000/cad-movimentacao", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosMovimentacao),
         credentials: 'include'
     })
-    .then(resposta => {
-        if (!resposta.ok) {
-            return resposta.json().then(err => {
-                throw new Error(err.erro || "Erro " + resposta.status)
-            })
-        }
-        return resposta.json()
-    })
-    .then(dados => {
-        fnLimparCampos()
-        console.log(dados)
-        fnCarregarSaldo()
-        alert("Movimentação Cadastrada Com Sucesso! ID: " + dados)
-    })
-    .catch(erro => console.log(erro))
+        .then(resposta => {
+            if (!resposta.ok) {
+                return resposta.json().then(err => {
+                    throw new Error(err.erro || "Erro " + resposta.status)
+                })
+            }
+            return resposta.json()
+        })
+        .then(dados => {
+            fnLimparCampos()
+            console.log(dados)
+            fnCarregarSaldo()
+            alert("Movimentação Cadastrada Com Sucesso! ID: " + dados)
+        })
+        .catch(erro => console.log(erro))
 }
 
 async function fnCarregarAssociados() {
-    const resposta = await fetch("http://127.0.0.1:3000/exibir-associados")
+    const resposta = await fetch("http://127.0.0.1:3000/exibir-associados", {
+        method: 'GET',
+        credentials: 'include'
+    })
     const dados = await resposta.json()
     let select = document.getElementById("associado_id_caixa")
     dados.forEach(a => {
@@ -51,7 +54,10 @@ ${a.nome}
 }
 
 async function fnCarregarCategorias() {
-    const resposta = await fetch("http://127.0.0.1:3000/exibir-categorias")
+    const resposta = await fetch("http://127.0.0.1:3000/exibir-categorias", {
+        method: 'GET',
+        credentials: 'include'
+    })
     const dados = await resposta.json()
     let select = document.getElementById("categoria_id")
     dados.forEach(a => {

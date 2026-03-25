@@ -1,6 +1,9 @@
 window.fnCarregarSaldo = async function () {
     try {
-        const resposta = await fetch("http://127.0.0.1:3000/saldo")
+        const resposta = await fetch("http://127.0.0.1:3000/saldo", {
+            method: 'GET',
+            credentials: 'include'
+        })
         const dados = await resposta.json()
 
         const saldo = parseFloat(dados.saldo || 0)

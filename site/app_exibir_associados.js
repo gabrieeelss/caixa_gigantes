@@ -13,6 +13,7 @@ function fnCarregarAssociados(associado) {
                                 <td>${data_nascimento.toLocaleDateString('pt-BR')}</td>
                                 <td>${associado.status}</td>
                                 <td>
+                                <button type="button" class="btn" onclick="fnExcluirAssociado(${associado.id}, event.target)" title="Excluir">❌</button>
                             </tr>
     `
 
@@ -20,7 +21,10 @@ function fnCarregarAssociados(associado) {
 }
 
 function fnCarregarDados() {
-    fetch('http://127.0.0.1:3000/exibir-associados', { method: 'GET', credentials: 'include' })
+    fetch('http://127.0.0.1:3000/exibir-associados', { 
+        method: 'GET', 
+        credentials: 'include' 
+    })
 
         .then(resposta => {
             if (!resposta.ok) {

@@ -35,7 +35,10 @@ function fnMontarLinhaCaixa(mov) {
 
 window.fnCarregarCaixa = async function () {
     try {
-        const resposta = await fetch("http://127.0.0.1:3000/caixa")
+        const resposta = await fetch("http://127.0.0.1:3000/caixa", {
+            method: 'GET',
+            credentials: 'include'
+        })
         const dados = await resposta.json()
 
         const tabela = document.getElementById("tabelaCaixa")

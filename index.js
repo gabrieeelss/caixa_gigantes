@@ -34,25 +34,6 @@ app.use(cadAssociadosRoutes)
 const caixaRoutes = require('./routes/caixaRoutes')
 app.use(caixaRoutes)
 
-// CADASTRAR MENSALIDADE
-// app.post("/cad-mensalidade", function (req, res) {
-//     const data = req.body
-
-//     console.log(data)
-
-//     conexao.query('INSERT INTO mensalidades SET ?', data, function (erro, resultado) {
-//         if (erro) {
-//             console.log("Erro ao inserir:", erro)
-//             return res.status(500).json({
-//                 erro: "Erro ao cadastrar mensalidade",
-//                 detalhes: erro.sqlMessage
-//             })
-//         }
-
-//         return res.json(resultado.insertId)
-//     })
-// })
-
 app.listen(process.env.PORTA, () => {
   console.log(`Servidor rodando na porta ${process.env.PORTA}`)
 })

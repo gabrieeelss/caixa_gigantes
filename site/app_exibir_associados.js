@@ -13,7 +13,8 @@ function fnCarregarAssociados(associado) {
                                 <td>${data_nascimento.toLocaleDateString('pt-BR')}</td>
                                 <td>${associado.status}</td>
                                 <td>
-                                <button type="button" class="btn" onclick="fnExcluirAssociado(${associado.id}, event.target)" title="Excluir">❌</button>
+                                <a href="editar_associado.html?id=${associado.id}" class="btn btn-outline-primary mb-1">📝 Editar</a>
+                                <button type="button" class="btn btn-outline-danger" onclick="fnExcluirAssociado(${associado.id}, event.target)" title="Excluir">❌ Excluir</button>
                             </tr>
     `
 

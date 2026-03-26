@@ -6,9 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Associado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 
 <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">Caixa Gigantes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="associados.html">Associados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cad_associado.html">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="caixa.html">Caixa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="mensalidades.html">Mensalidades</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <button class="btn btn-danger btn-sm" onclick="logout()">Sair</button>
+            </div>
+        </div>
+    </div>
+</nav>
 
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -87,6 +115,9 @@
     </div>
 
     <script src="./app/app_cad_associado.js"></script>
+    <script src="./app/app_logout.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

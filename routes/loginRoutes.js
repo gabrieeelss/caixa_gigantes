@@ -31,4 +31,9 @@ router.post("/login", function (req, res) {
     );
 });
 
+router.post("/logout", function (req, res) {
+    req.session.destroy();
+    res.json({ mensagem: "Logout realizado" });
+});
+
 module.exports = router

@@ -8,15 +8,22 @@ function verificarLogin(req, res, next) {
 
 function permitir(...niveisPermitidos) {
     return function (req, res, next) {
-        if (!req.session || !req.session.usuario) {
-            return res.status(401).send('Não autorizado')
+        console.log("SESSION:", req.session);
+        console.log("USUARIO:", req.session.usuario);
+        console.log("NIVEL:", req.session.usuario?.nivel);
+        console.log("PERMITIDOS:", niveisPermitidos);
+
+        if (!req.session.usuario) {
+            return res.status(401).json({
+                erro: "Não autorizado"
+            })
         }
-        const nivelUsuario = req.session.usuario.nivel
-        if (niveisPermitidos.includes(nivelUsuario)) {
-            next()
-        } else {
-            res.status(403).send('Acesso negado')
+        if (!niveisPermitidos.includes(req.session.usuario.nivel)) {
+            return res.status(403).json({
+                erro: "Acesso negado"
+            })
         }
+        next()
     }
 }
 

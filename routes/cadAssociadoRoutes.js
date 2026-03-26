@@ -17,14 +17,23 @@ router.get("/exibir-associados", verificarLogin, function (req, res) {
 // CADASTRAR ASSOCIADO
 router.post("/cad-associado", permitir('admin', 'operador'), function (req, res) {
     const data = req.body
-
-    console.log(data)
+    if (!data.nome || !data.cpf || !data.rg || !data.endereco) {
+        return res.status(400).json({
+            erro: "Campos obrigatórios: nome, cpf, rg e endereço"
+        })
+    }
     conexao.query('INSERT INTO associados SET ?', [data],
         function (erro, resultado) {
             if (erro) {
-               return res.status(500).json(erro);
+                console.log(erro);                
+               return res.status(500).json({
+                erro: "Erro ao cadastrar associado"
+               })
             }
-            res.send(resultado.insertId.toString());
+            res.status(201).json({
+                mensagem: "Associado cadastrado com sucesso!",
+                id: resultado.insertId
+            })
         });
 })
 
@@ -59,52 +68,36 @@ router.get("/associado/:id", verificarLogin, function (req, res) {
 // EDITAR ASSOCIADO
 router.put("/associado/:id", permitir('admin', 'operador'), function (req, res) {
     const { id } = req.params;
-    const {
-        data_associacao,
-        data_nascimento,
-        nome,
-        email,
-        telefone,
-        status,
-        cpf,
-        rg,
-        endereco
-    } = req.body;
+    const data = req.body;
 
-    const sql = `
-        UPDATE associados
-        SET
-            data_associacao = ?,
-            data_nascimento = ?,
-            nome = ?,
-            email = ?,
-            telefone = ?,
-            status = ?,
-            cpf = ?,
-            rg = ?,
-            endereco = ?
-        WHERE id = ?
-    `;
+    if (!data.nome || !data.cpf || !data.rg || !data.endereco) {
+        return res.status(400).json({
+            erro: "Campos obrigatórios: nome, cpf, rg, endereco"
+        });
+    }
 
-    const valores = [
-        data_associacao,
-        data_nascimento,
-        nome,
-        email,
-        telefone,
-        status,
-        cpf,
-        rg,
-        endereco,
-        id
-    ];
+    conexao.query(
+        'UPDATE associados SET ? WHERE id = ?',
+        [data, id],
+        function (erro, resultado) {
+            if (erro) {
+                console.log(erro);
+                return res.status(500).json({
+                    erro: "Erro ao atualizar associado"
+                });
+            }
 
-    conexao.query(sql, valores, function (erro, resultado) {
-        if (erro) {
-            return res.status(500).json({ erro: "Erro ao atualizar associado." });
+            if (resultado.affectedRows === 0) {
+                return res.status(404).json({
+                    erro: "Associado não encontrado"
+                });
+            }
+
+            res.json({
+                mensagem: "Associado atualizado com sucesso"
+            });
         }
-
-        res.json({ mensagem: "Associado atualizado com sucesso." });
-    });
+    );
 });
+
 module.exports = router

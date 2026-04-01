@@ -28,14 +28,17 @@ res.send('CaixaGigantes')
 const loginRoutes = require('./routes/loginRoutes')
 app.use(loginRoutes)
 
-const cadAssociadosRoutes = require('./routes/cadAssociadoRoutes')
-app.use(cadAssociadosRoutes)
+const associadosRoutes = require('./routes/associadoRoutes')
+app.use(associadosRoutes)
 
 const caixaRoutes = require('./routes/caixaRoutes')
 app.use(caixaRoutes)
 
 const mensalidadeRoutes = require('./routes/mensalidadeRoutes')
 app.use(mensalidadeRoutes)
+
+const usuariosRoutes = require('./routes/usuariosRoutes')
+app.use(usuariosRoutes)
 
 app.listen(process.env.PORTA, () => {
   console.log(`Servidor rodando na porta ${process.env.PORTA}`)

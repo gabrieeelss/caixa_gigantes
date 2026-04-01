@@ -34,6 +34,9 @@ app.use(cadAssociadosRoutes)
 const caixaRoutes = require('./routes/caixaRoutes')
 app.use(caixaRoutes)
 
+const mensalidadeRoutes = require('./routes/mensalidadeRoutes')
+app.use(mensalidadeRoutes)
+
 app.listen(process.env.PORTA, () => {
   console.log(`Servidor rodando na porta ${process.env.PORTA}`)
 })

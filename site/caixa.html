@@ -113,8 +113,44 @@
                 </div>
             </div>
         </form>
-        <!-- TABELA -->
 
+        <!-- FILTROS DE DATA -->
+         <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0">Filtrar movimentações por data</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row g-2">
+            
+            <div class="col-md-3">
+                <label class="form-label">Data inicial</label>
+                <input type="date" id="data_inicio" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Data final</label>
+                <input type="date" id="data_fim" class="form-control">
+            </div>
+
+            <div class="col-md-3 d-grid">
+                <label class="form-label invisible">.</label>
+                <button type="button" class="btn btn-primary" onclick="fnFiltrarMovimentacoes()">
+                    Filtrar
+                </button>
+            </div>
+
+            <div class="col-md-3 d-grid">
+                <label class="form-label invisible">.</label>
+                <button type="button" class="btn btn-outline-secondary" onclick="fnLimparFiltroMovimentacoes()">
+                    Limpar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+        <!-- TABELA -->
         <div class="card shadow-sm">
             <div class="card-header">
                 Movimentações

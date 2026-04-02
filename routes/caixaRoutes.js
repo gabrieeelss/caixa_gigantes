@@ -57,33 +57,6 @@ router.get("/saldo", verificarLogin, function (req, res) {
     })
 })
 
-// LISTAR MOVIMENTAÇÕES
-router.get("/caixa", verificarLogin, function (req, res) {
-    const sql = `
-        SELECT
-            c.id,
-            c.data_movimento,
-            c.descricao,
-            c.valor,
-            c.nome_manual,
-            cat.nome AS categoria,
-            cat.tipo,
-            a.nome AS associado
-        FROM caixa c
-        INNER JOIN categorias cat ON cat.id = c.categoria_id
-        LEFT JOIN associados a ON a.id = c.associado_id
-        ORDER BY c.data_movimento DESC, c.id DESC
-    `
-    conexao.query(sql, function (erro, resultado) {
-        if (erro) {
-            console.log("Erro ao buscar movimentações:", erro)
-            return res.status(500).json({ erro: "Erro ao buscar movimentações" })
-        }
-
-        return res.json(resultado)
-    })
-})
-
 // DELETAR MOVIMENTAÇÃO
 router.delete('/caixa/:id', permitir('admin'), function (req, res) {
 const id = req.params.id
@@ -162,4 +135,49 @@ router.put("/caixa/:id", verificarLogin, permitir("admin", "operador"), (req, re
         }
     )
 })
+
+// FILTRO POR DATA
+router.get("/caixa", verificarLogin, function (req, res) {
+    const { data_inicio, data_fim } = req.query
+
+    let sql = `
+        SELECT 
+            c.id,
+            c.data_movimento,
+            c.descricao,
+            c.valor,
+            c.nome_manual,
+            cat.nome AS categoria,
+            cat.tipo,
+            a.nome AS associado
+        FROM caixa c
+        LEFT JOIN categorias cat ON c.categoria_id = cat.id
+        LEFT JOIN associados a ON c.associado_id = a.id
+        WHERE 1=1
+    `
+
+    const params = []
+
+    if (data_inicio) {
+        sql += " AND DATE(c.data_movimento) >= ?"
+        params.push(data_inicio)
+    }
+
+    if (data_fim) {
+        sql += " AND DATE(c.data_movimento) <= ?"
+        params.push(data_fim)
+    }
+
+    sql += " ORDER BY c.data_movimento DESC, c.id DESC"
+
+    conexao.query(sql, params, function (erro, resultados) {
+        if (erro) {
+            console.log("Erro ao buscar caixa:", erro)
+            return res.status(500).json({ erro: "Erro ao buscar caixa." })
+        }
+
+        res.json(resultados)
+    })
+})
+
 module.exports = router

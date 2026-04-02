@@ -84,6 +84,82 @@ router.get("/caixa", verificarLogin, function (req, res) {
     })
 })
 
+// DELETAR MOVIMENTAÇÃO
+router.delete('/caixa/:id', permitir('admin'), function (req, res) {
+const id = req.params.id
+
+conexao.query(`DELETE FROM caixa WHERE id = ?`, [id], function (erro, resultado) {
+    if (erro) {
+       return res.status(500).send(erro)
+    }
+    res.send({ "status": 200, "message": "Movimentação excluida com sucesso!"})
+})
+})
 
 
+// BUSCAR MOVIMENTAÇÃO POR ID
+router.get("/caixa/:id", verificarLogin, permitir("admin", "operador"), (req, res) => {
+    const { id } = req.params
+
+    const sql = "SELECT * FROM caixa WHERE id = ?"
+
+    conexao.query(sql, [id], (erro, resultado) => {
+        if (erro) {
+            console.log(erro)
+            return res.status(500).json({ erro: "Erro ao buscar movimentação." })
+        }
+
+        if (resultado.length === 0) {
+            return res.status(404).json({ erro: "Movimentação não encontrada." })
+        }
+
+        res.json(resultado[0])
+    })
+})
+
+// EDITAR MOVIMENTAÇÃO
+router.put("/caixa/:id", verificarLogin, permitir("admin", "operador"), (req, res) => {
+    const { id } = req.params
+    const {
+        data_movimento,
+        associado_id,
+        nome_manual,
+        categoria_id,
+        descricao,
+        valor
+    } = req.body
+
+    const sql = `
+        UPDATE caixa
+        SET
+            data_movimento = ?,
+            associado_id = ?,
+            nome_manual = ?,
+            categoria_id = ?,
+            descricao = ?,
+            valor = ?
+        WHERE id = ?
+    `
+
+    conexao.query(
+        sql,
+        [
+            data_movimento,
+            associado_id || null,
+            nome_manual || null,
+            categoria_id,
+            descricao,
+            valor,
+            id
+        ],
+        (erro, resultado) => {
+            if (erro) {
+                console.log(erro)
+                return res.status(500).json({ erro: "Erro ao atualizar movimentação." })
+            }
+
+            res.json({ mensagem: "Movimentação atualizada com sucesso." })
+        }
+    )
+})
 module.exports = router

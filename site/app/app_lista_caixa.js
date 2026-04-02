@@ -29,6 +29,9 @@ function fnMontarLinhaCaixa(mov) {
             <td>${mov.categoria}</td>
             <td>${descricao}</td>
             <td class="${classeValor}">${sinal} R$ ${valorFormatado}</td>
+            <td>
+                <a href="editar_mov.html?id=${mov.id}" class="btn btn-outline-primary mb-1">📝 Editar</a>
+                <button type="button" class="btn btn-outline-danger" onclick="fnExcluirMovimentacao(${mov.id}, event.target)" title="Excluir">❌ Excluir</button>
         </tr>
     `
 }
@@ -47,7 +50,7 @@ window.fnCarregarCaixa = async function () {
         if (dados.length === 0) {
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="6" class="text-center text-muted">Nenhuma movimentação cadastrada.</td>
+                    <td colspan="7" class="text-center text-muted">Nenhuma movimentação cadastrada.</td>
                 </tr>
             `
             return

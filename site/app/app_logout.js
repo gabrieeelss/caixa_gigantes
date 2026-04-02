@@ -4,7 +4,7 @@ function logout() {
         credentials: "include"
     })
     .then(() => {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     })
     .catch(() => {
         alert("Erro ao sair");

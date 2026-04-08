@@ -41,5 +41,5 @@ const usuariosRoutes = require('./routes/usuariosRoutes')
 app.use(usuariosRoutes)
 
 app.listen(process.env.PORTA, () => {
-  console.log(`Servidor rodando na porta ${process.env.PORTA}`)
+  console.log(`API rodando na porta ${process.env.PORTA}`)
 })

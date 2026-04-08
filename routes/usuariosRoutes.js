@@ -70,4 +70,17 @@ router.get("/exibir-usuarios", verificarLogin, function (req, res) {
         res.json(dados)
     })
 })
+
+// DELETAR USUÁRIO
+router.delete('/usuarios/:id', permitir('admin'), function (req, res) {
+const id = req.params.id
+
+conexao.query(`DELETE FROM usuarios WHERE id = ?`, [id], function (erro, resultado) {
+    if (erro) {
+       return res.status(500).send(erro)
+    }
+    res.send({ "status": 200, "message": "Usuário excluído com sucesso!"})
+})
+})
+
 module.exports = router

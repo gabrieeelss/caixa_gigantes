@@ -36,12 +36,6 @@ Esta API permite gerenciar associados, movimentações de caixa, mensalidades e 
    DB_PASSWORD=sua_senha
    DB_NAME=caixa_gigantes
    ```
-SERVIDOR_BD=216.172.172.29
-PORTA=3000
-DATABASE=gigant71_caixa_gigantes
-USER_BD=gigant71_gabriel
-SENHA_BD=Ssoentrar,0812G
-
 
 4. Execute o servidor:
    ```bash

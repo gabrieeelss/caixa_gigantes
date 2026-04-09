@@ -30,6 +30,8 @@ function fnMontarLinhaMensalidade(mens) {
             <td>R$ ${valorFormatado}</td>
             <td>${fnFormatarData(mens.data_pagamento)}</td>
             <td class="${classeStatus}">${textoStatus}</td>
+            <td>
+                <button type="button" class="btn btn-outline-danger" onclick="fnExcluirMensalidade(${mens.id}, event.target)" title="Excluir">❌ Excluir</button>
         </tr>
     `
 }

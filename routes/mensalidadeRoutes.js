@@ -180,4 +180,16 @@ router.get("/mensalidades", verificarLogin, function (req, res) {
     })
 })
 
+// DELETAR MENSALIDADE
+router.delete('/mensalidades/:id', permitir('admin'), function (req, res) {
+const id = req.params.id
+
+conexao.query(`DELETE FROM mensalidades WHERE id = ?`, [id], function (erro, resultado) {
+    if (erro) {
+       return res.status(500).send(erro)
+    }
+    res.send({ "status": 200, "message": "Mensalidade excluída com sucesso!"})
+})
+})
+
 module.exports = router
